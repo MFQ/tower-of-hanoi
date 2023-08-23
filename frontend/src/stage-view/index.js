@@ -4,30 +4,37 @@ import { Stage } from 'react-konva';
 import TowerState from "../tower-state"
 import Towers from "../towers"
 import { generate_steps } from "../common/api"
-
+import { isValidMove, generate_pegs } from "../common/utils"
 import { TowerOne, TowerThree, TowerTwo, MaxHeight, MaxWidth, TowersPlacement } from "../common/constant";
 
+const StageView = ({
+  isDragable,
+  numberOFPegs, 
+  setPlaying, 
+  playing, 
+  logStep, 
+  restart, 
+  setRestart
+}) => {
 
-const StageView = ({isDragable, numberOFPegs, setPlaying, playing, logStep}) => {
-
-
-  const [towerOneState, setTowerOneState] = useState([1,2,3])
+  const [towerOneState, setTowerOneState] = useState(generate_pegs(numberOFPegs))
   const [towerTwoState, setTowerTwoState] = useState([])
   const [towerThreeState, setTowerThreeState] = useState([])
 
-  const isValidMove = (peg, tower) => {
-    if (tower.length === 0) 
-      return true;
-    return tower[0] > peg
-  }
+  useEffect(() => {
+    if(restart) {
+      setTowerOneState(generate_pegs(numberOFPegs));
+      setTowerTwoState([]);
+      setTowerThreeState([]);
+      setRestart(false)
+    }    
+  }, [restart])
 
   const updateState = (tower, peg) => {
     if(TowerOne === tower)
       setTowerOneState([peg, ...towerOneState]);
-
     if(TowerTwo === tower)
       setTowerTwoState([peg, ...towerTwoState]);
-    
     if(TowerTwo === tower)
       setTowerThreeState([peg, ...towerThreeState]);
   }
@@ -65,47 +72,38 @@ const StageView = ({isDragable, numberOFPegs, setPlaying, playing, logStep}) => 
 
     if (e.evt) {
       if( TowersPlacement[TowerOne] < e.evt.screenX && e.evt.screenX < TowersPlacement[TowerTwo] + 60) {
-        console.log("TowerOne x="+e.evt.screenX)
-
         if(isValidMove(peg, towerOneState)) {
           removePeg(peg)
           setTowerOneState([peg, ...towerOneState])
+          logStep([towerOneState, towerTwoState, towerThreeState])
         } else { 
           e.target.remove()
           updateState(removePeg(peg), peg)
         }
       }
-
-
       if( (60 + TowersPlacement[TowerTwo]) < e.evt.screenX && e.evt.screenX < TowersPlacement[TowerThree] + 100) {
-        console.log("TowerTwox = "+e.evt.screenX)
         if(isValidMove(peg, towerTwoState)) {
           removePeg(peg)
           setTowerTwoState([peg, ...towerTwoState])
+          logStep([towerOneState, towerTwoState, towerThreeState])
         } else {
           e.target.remove()
           updateState(removePeg(peg), peg)
         }
       }
-
       if(e.evt.screenX > TowersPlacement[TowerThree] + 100) {
-        console.log("TowerThreex = "+e.evt.screenX)
-        // console.log(e.target.attrs.name)
         if(isValidMove(peg, towerThreeState)) {
           removePeg(peg)
           setTowerThreeState([peg, ...towerThreeState])
+          logStep([towerOneState, towerTwoState, towerThreeState])
         } else {
           e.target.remove()
           updateState(removePeg(peg), peg)
         }
       }
-
-      
     }
   }
 
-
-    
   useEffect( () => {
 
     if(playing) {
@@ -120,7 +118,7 @@ const StageView = ({isDragable, numberOFPegs, setPlaying, playing, logStep}) => 
               setTowerTwoState(t2);
               setTowerThreeState(t3);
               logStep(step)
-              if(i == steps.length - 1) {
+              if(i === steps.length - 1) {
                 setPlaying(false)
               }
             }, i * 2000);  // one sec interval

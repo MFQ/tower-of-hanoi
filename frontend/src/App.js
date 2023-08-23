@@ -10,9 +10,23 @@ const App = () => {
 
   const [numberOFPegs, setNumberOfPegs] = useState(3)
   const [playing, setPlaying] = useState(false)
+  const [freeFlow, setFreeFlow] = useState(false)
+  const [restart, setRestart] = useState(false);
   const [renderSteps, setRenderSteps] = useState([])
 
   const startPlay = () => setRenderSteps([]) || setPlaying(true);
+  const doRestart = () => {
+    setRenderSteps([]);
+    setRestart(true)
+  }
+  const enableFreeFlow = () => {
+    doRestart()
+    setFreeFlow(true)
+  }
+  const disableFreeFlow = () => {
+    doRestart()
+    setFreeFlow(false)
+  } 
   const incrementPeg = () => setNumberOfPegs(numberOFPegs + 1)
   const decrementPeg = () => numberOFPegs > 1 && setNumberOfPegs(numberOFPegs - 1)
   const logStep =  step => {
@@ -24,21 +38,26 @@ const App = () => {
     <>
       <StageView 
         numberOFPegs={numberOFPegs} 
-        isDragable={false} 
+        isDragable={freeFlow} 
         playing={playing} 
         setPlaying={setPlaying}
         logStep={logStep}
+        restart={restart}
+        setRestart={setRestart}
       />
       {
         playing ? <div className='rendering-msg'>{`rendering moves for ${numberOFPegs} pegs ......` }</div>
         :
-        
-          <Toolbar 
-            value={numberOFPegs}  
-            startPlay={startPlay}
-            incrementPeg={incrementPeg}
-            decrementPeg={decrementPeg}
-          />
+        <Toolbar 
+          value={numberOFPegs}
+          startPlay={startPlay}
+          freeFlow={freeFlow}
+          incrementPeg={incrementPeg}
+          decrementPeg={decrementPeg}
+          enableFreeFlow={enableFreeFlow}
+          disableFreeFlow={disableFreeFlow}
+          doRestart={doRestart}
+        />
       }
       <ActivityLog renderSteps={renderSteps}/>
     </>
