@@ -1,7 +1,11 @@
 import React from "react"
 
+import "./index.scss"
+
+const ToolbarClass = "tool-bar"
+
 const Toolbar = ({ value, startPlay, incrementPeg, decrementPeg }) => (
-  <div>
+  <div className={ToolbarClass}>
     <span> Enter Number of Pegs </span>
     <input type="number" placeholder="Enter number of pegs" value={value} disabled />
     <button onClick={incrementPeg}> + </button> 
