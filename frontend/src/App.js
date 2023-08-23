@@ -113,6 +113,28 @@ const App = () => {
     [ [], [], [1,2,3] ]
   ]
 
+  
+// ('Move disk', 1, 'from rod', 'A', 'to rod', 'B')
+// ('Move disk', 2, 'from rod', 'A', 'to rod', 'C')
+// ('Move disk', 1, 'from rod', 'B', 'to rod', 'C')
+// ('Move disk', 3, 'from rod', 'A', 'to rod', 'B')
+// ('Move disk', 1, 'from rod', 'C', 'to rod', 'A')
+// ('Move disk', 2, 'from rod', 'C', 'to rod', 'B')
+// ('Move disk', 1, 'from rod', 'A', 'to rod', 'B')
+
+
+  const steps2 = [
+    [[1, 2, 3], [], []], 
+    [[2, 3], [], [1]], 
+    [[3], [2], [1]], 
+    [[3], [1, 2], []], 
+    [[], [1, 2], [3]], 
+    [[1], [2], [3]], 
+    [[1], [], [2, 3]], 
+    [[], [], [1, 2, 3]]
+  ]
+
+
   useEffect( () => {
     for(var i=0; i<steps.length; i++) {
       
