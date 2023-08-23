@@ -26,7 +26,7 @@ const Toolbar = ({
         <input type="number" placeholder="Enter number of pegs" value={value} disabled />
         <button onClick={incrementPeg}> + </button> 
         <button onClick={decrementPeg}> - </button>
-        <button onClick={startPlay}> Play </button>
+        <button onClick={startPlay}> Solve </button>
         <button onClick={enableFreeFlow}>Enable Free Flow </button>
       </>
     }
