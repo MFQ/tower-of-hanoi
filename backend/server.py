@@ -30,7 +30,6 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    # a simple page that says hello
     @cross_origin
     @app.route('/generate-steps', methods=["POST"])
     def generate_steps():
