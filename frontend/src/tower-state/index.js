@@ -2,7 +2,7 @@ import React from "react";
 import { Layer, Rect } from 'react-konva';
 import { MaxHeight, TowersPlacement } from "../common/constant"
 
-const Tower = ({ onDragMove, input, towrNumber, onDragEnd }) => (
+const Tower = ({ onDragMove, input, towrNumber, onDragEnd, isDragable }) => (
   <Layer>
     {
       input.map( (i, index)  => {
@@ -18,7 +18,7 @@ const Tower = ({ onDragMove, input, towrNumber, onDragEnd }) => (
             width={pegWidth}
             height={20}
             fill="red"
-            draggable
+            draggable={isDragable}
             shadowBlur={10}
             cornerRadius={10}
             onDragMove={onDragMove}

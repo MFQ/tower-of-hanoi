@@ -1,0 +1,24 @@
+.activity-class {
+
+  margin-top: 2%;
+  margin-left: 2%;
+
+  &-list {
+    display: flex;
+  }
+
+  &-TowerA {
+    width: 15%;
+    color: #054f1d;
+  }
+
+  &-TowerB {
+    width: 15%;
+    color: rgb(51, 0, 255);
+  }
+
+  &-TowerC {
+    width: 15%;
+    color: red;
+  }
+}

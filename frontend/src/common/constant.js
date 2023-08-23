@@ -14,6 +14,8 @@ const TowersPlacement = {
 
 }
 
+const numberRegx = /^\d+$/
+
 export {
   OriginX,
   OriginY,
@@ -22,5 +24,6 @@ export {
   TowersPlacement,
   TowerOne,
   TowerTwo,
-  TowerThree
+  TowerThree,
+  numberRegx
 }
