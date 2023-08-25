@@ -2,17 +2,24 @@ import os
 
 from flask import Flask, request
 from flask_cors import CORS, cross_origin
-
 from tower_of_hanoi.algorithm import Algorithm
 
 
-# def create_app():
-    # create and configure the app
 app = Flask(__name__)
-cors = CORS(app)
+
 app.config['CORS_HEADERS'] = 'Content-Type'
 
-@cross_origin
+CORS(app, resource={
+    r"/*":{
+        "origins":"*"
+    }
+})
+
+@app.route("/")
+def home():
+    return "running."
+
+@cross_origin()
 @app.route('/generate-steps', methods=["POST"])
 def generate_steps():
     body = request.get_json()
@@ -27,4 +34,3 @@ def generate_steps():
         return {
             "error": "missing number of pegs from the body"
         }
-    # return app

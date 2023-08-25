@@ -4,7 +4,7 @@ const generate_pegs = n =>
 const isValidMove = (peg, tower) => {
   if (tower.length === 0) 
     return true;
-  return tower[0] > peg
+  return tower[0] >= peg
 }
 
 export {

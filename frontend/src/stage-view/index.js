@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Stage } from 'react-konva';
+import { uniq } from "lodash";
 
 import TowerState from "../tower-state"
 import Towers from "../towers"
@@ -22,8 +23,8 @@ const StageView = ({
   const [towerThreeState, setTowerThreeState] = useState([])
 
   useEffect(() => {
-    if(restart) {
-      setTowerOneState(generate_pegs(numberOFPegs));
+    if(restart) {      
+      setTowerOneState([...generate_pegs(numberOFPegs)]);
       setTowerTwoState([]);
       setTowerThreeState([]);
       setRestart(false)
@@ -41,17 +42,17 @@ const StageView = ({
 
   const removePeg = (peg) =>  {
     if (towerOneState.includes(peg)) {
-      setTowerOneState(towerOneState.filter(e => e !== peg))
+      setTowerOneState([...towerOneState.filter(e => e !== peg)])
       return TowerOne
     }
 
     if (towerTwoState.includes(peg)) {
-      setTowerTwoState(towerTwoState.filter(e => e !== peg))
+      setTowerTwoState([...towerTwoState.filter(e => e !== peg)])
       return TowerTwo
     }
 
     if (towerThreeState.includes(peg)) {
-      setTowerThreeState(towerThreeState.filter(e => e !== peg))
+      setTowerThreeState([...towerThreeState.filter(e => e !== peg)])
       return TowerThree
     }
   }
@@ -71,31 +72,38 @@ const StageView = ({
     const peg = parseInt(e.target.attrs.name);
 
     if (e.evt) {
-      if( TowersPlacement[TowerOne] < e.evt.screenX && e.evt.screenX < TowersPlacement[TowerTwo] + 60) {
+      const clientX = e.evt.clientX;
+      if(TowersPlacement[TowerOne] < clientX && clientX < TowersPlacement[TowerTwo]) {
+        // debugger
         if(isValidMove(peg, towerOneState)) {
-          removePeg(peg)
-          setTowerOneState([peg, ...towerOneState])
-          logStep([towerOneState, towerTwoState, towerThreeState])
+          removePeg(peg)        
+          const newTowerOne = uniq([peg, ...towerOneState])
+          setTowerOneState([...newTowerOne])
+          logStep([newTowerOne, towerTwoState, towerThreeState])
         } else { 
           e.target.remove()
           updateState(removePeg(peg), peg)
         }
       }
-      if( (60 + TowersPlacement[TowerTwo]) < e.evt.screenX && e.evt.screenX < TowersPlacement[TowerThree] + 100) {
+      if( (TowersPlacement[TowerTwo]) < clientX && clientX < TowersPlacement[TowerThree]) {
+        // debugger
         if(isValidMove(peg, towerTwoState)) {
           removePeg(peg)
-          setTowerTwoState([peg, ...towerTwoState])
-          logStep([towerOneState, towerTwoState, towerThreeState])
+          const newTowerTwo = uniq([peg, ...towerTwoState])
+          setTowerTwoState([...newTowerTwo])
+          logStep([towerOneState, newTowerTwo, towerThreeState])
         } else {
           e.target.remove()
           updateState(removePeg(peg), peg)
         }
       }
-      if(e.evt.screenX > TowersPlacement[TowerThree] + 100) {
+      if(clientX > TowersPlacement[TowerThree]) {
+        // debugger
         if(isValidMove(peg, towerThreeState)) {
           removePeg(peg)
-          setTowerThreeState([peg, ...towerThreeState])
-          logStep([towerOneState, towerTwoState, towerThreeState])
+          const newTowerThree = uniq([peg, ...towerThreeState])
+          setTowerThreeState([...newTowerThree])
+          logStep([towerOneState, towerTwoState, newTowerThree])
         } else {
           e.target.remove()
           updateState(removePeg(peg), peg)
