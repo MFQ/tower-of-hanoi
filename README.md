@@ -1,7 +1,27 @@
 # Tower of Hanoi
 To simulate and play famouse tower of Hanoi algorithm I have create two applications one represent frontend and other backend. Frontend is an React application and backend is a flask based python application. To get glimpse of its web architecture please review this system diagram.
 ![image](https://github.com/MFQ/tower-of-hanoi/assets/1052725/cff241fe-c6cd-4917-ad5c-1290146d7cec)
+I have come up with a datastructure that will represent, how many pegs are their in the tower. State of tower will vary as we will try to solve this problem. It is two dimensional array that represent the state of the tower. For example 
 
+```python
+towers = [ [1,2,3], [], [] ]
+```
+Above towers two dimensional array represents first tower has three pegs and other two towers are empty. This screenshort will give you more better understanding. 
+![image](https://github.com/MFQ/tower-of-hanoi/assets/1052725/c80dfdd6-97e4-48f9-88e3-b97ec96069e2)
+
+Now using the powers of this data struture we can save the states of algorithm as it try to solve this problem. To store these moves we will again use another array which will transform our data structure into three dimensional array. For example when we ran this algorithm for three pegs follows moves can be represented by our three dimensional array like this
+```python
+moves_for_three_pegs = [
+  [ [1,2,3], [], [] ],
+  [ [2,3], [], [1] ]
+  [ [3], [2], [1] ]
+  [ [3], [1,2], [] ]
+  [ [], [1,2], [3] ]
+  [ [1], [2], [3] ]
+  [ [1], [], [2,3] ]
+  [ [1], [], [1,2,3] ]
+]
+```
 
 
 # Frontend Application
