@@ -22,12 +22,12 @@ moves_for_three_pegs = [
   [ [1], [], [1,2,3] ]
 ]
 ```
-This data structure is kind of backbone for both frontend and backend applications. As it is an array so its accessibility and maintenance is super simple which in results makes implementation of Tower of Hannoi problem super simple. 
+This data structure is kind of backbone for both frontend and backend applications. As it is an array so its accessibility and maintenance is super simple which in result makes implementation of Tower of Hannoi problem super simple. 
 
 # Frontend Application
-Frontend application is consists two modes simulate moves for solving algorithm and other mode is to solve this problem freely. To build flexible Ui I have used konva.js to programmatically draw Tower of hanoi Ui through canvas tag. As mentioned above tower state data structure is the main backbone of our frontend application. All kind of tower states, activiting logs and resolution of tower problem is dependent upon this algorithm. Backend API is responsible for generating solution and send it back to frontend in towar state data struture. After getting resulation of the problem programmatically generates pegs and simulate an animated flow to move all pegs from tower one to tower 3 in a interactive manner. In simulator mode there are two buttons which can increase or decrease numbers of pegs. After selecting number of pegs click on solve button which will start simulating new solution again. In free flow mode user get chance to solve this problem on his own. Peg can be drag and drop into various towers and you can always reset the puzzle. It is react applicaiton which heavliy relays on hocks, useEffect and functional component. Frontend application can be access from this URL https://tower-of-hanoi-ui-7c6aeeb204e8.herokuapp.com/
+Frontend application consists of two modes: first can be called simulate mode for rendering solution of the problem, while the other mode is to solve this problem through freeplay. To build flexible UI I have used konva.js to programmatically draw Tower of Hanoi UI through canvas tag. As mentioned above tower state data structure is the main backbone of our frontend application. All kind of tower states, logging activities and resolution of tower problems, are dependent upon this data structure. Backend API is responsible for generating solution in tower state data struture. After getting solution, frontend app programmatically generates number of pegs and then uses those pegs to simulate an animated flow which moves all pegs from tower one to tower 3. In simulator mode there are two buttons which can increase or decrease numbers of pegs. After selecting number of pegs, click on solve button which will start simulating new solution again. In freeplay mode, user gets a chance to solve this problem on his own. Peg can be dragged and dropped into various towers and you can always reset the puzzle. It is react applicaiton which heavily relies on hocks, useEffect and functional component. Frontend application can be accessed from this URL https://tower-of-hanoi-ui-7c6aeeb204e8.herokuapp.com/
 
-Here are the instructure to start frontend application 
+Here are the instructions to start the frontend application 
 ```python
   # install node version v16.14.2, I usually use nvm to manage multiple node version on my system.
   nvm install v16.14.2
@@ -39,10 +39,11 @@ Here are the instructure to start frontend application
 
 
 # Backend Application
-Backend application is consist of one endpoint who accepts **number_of_pegs** from user generates solution for the problem. Orignal implementation of alogrithm only prints out moves in the form of strings. I have wrote a helper function which generates tower state data structure format. As it is an python Flask based application so for deployment I have used **gunicorn** web server gateway interface HTTP server for deployment on Heroku. 
-here are the instructions to spin up
+Backend application consists of one endpoint that accepts **number_of_pegs** from user and generates solution for the problem. Original implementation of alogrithm only prints out moves in the form of strings. I have written a helper function that creates moves in tower data structure format. As it is a python Flask based application, so, for deployment I have used **gunicorn** web server. 
+
+Here are the instructions to spin up
 ```python
-# first create an seprate environment with python3
+# first create a seprate environment with python3
 python3.9 -m venv env
 
 #activate into that environment 
