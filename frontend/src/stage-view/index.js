@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Stage } from 'react-konva';
-import { uniq } from "lodash";
+import { uniq, isEqual } from "lodash";
 
 import TowerState from "../tower-state"
 import Towers from "../towers"
@@ -15,12 +15,20 @@ const StageView = ({
   playing, 
   logStep, 
   restart, 
-  setRestart
+  setRestart,
+  setComplete
 }) => {
 
-  const [towerOneState, setTowerOneState] = useState(generate_pegs(numberOFPegs))
-  const [towerTwoState, setTowerTwoState] = useState([])
-  const [towerThreeState, setTowerThreeState] = useState([])
+  const [towerOneState, setTowerOneState] = useState(generate_pegs(numberOFPegs));
+  const [towerTwoState, setTowerTwoState] = useState([]);
+  const [towerThreeState, setTowerThreeState] = useState([]);
+
+  useEffect(() => {
+    if (isEqual(towerThreeState, generate_pegs(numberOFPegs))) {
+      setComplete(true)
+    }
+  }, [towerThreeState])
+
 
   useEffect(() => {
     if(restart) {      

@@ -1,6 +1,4 @@
 import React, {useState} from 'react';
-
-
 import StageView from './stage-view';
 import Toolbar from './toolbar';
 import ActivityLog from "./activity-logs"
@@ -13,11 +11,13 @@ const App = () => {
   const [freeFlow, setFreeFlow] = useState(false)
   const [restart, setRestart] = useState(false);
   const [renderSteps, setRenderSteps] = useState([])
+  const [complete, setComplete] = useState(false)
 
   const startPlay = () => setRenderSteps([]) || setPlaying(true);
   const doRestart = () => {
     setRenderSteps([]);
-    setRestart(true)
+    setComplete(false);
+    setRestart(true);
   }
   const enableFreeFlow = () => {
     doRestart()
@@ -44,6 +44,7 @@ const App = () => {
         logStep={logStep}
         restart={restart}
         setRestart={setRestart}
+        setComplete={setComplete}
       />
       {
         playing ? <div className='rendering-msg'>{`rendering moves for ${numberOFPegs} pegs ......` }</div>
@@ -58,6 +59,9 @@ const App = () => {
           disableFreeFlow={disableFreeFlow}
           doRestart={doRestart}
         />
+      }
+      {
+        complete && <p className='complete'> Completed!!! </p>
       }
       <ActivityLog renderSteps={renderSteps}/>
     </>
