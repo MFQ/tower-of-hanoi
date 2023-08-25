@@ -49,7 +49,7 @@ Here are the instructions to start the frontend application
 # Backend Application
 Backend application consists of one endpoint that accepts **number_of_pegs** from user and generates solution for the problem. Original implementation of alogrithm only prints out moves in the form of strings. I have written a helper function that creates moves in tower data structure format. As it is a python Flask based application, so, for deployment I have used **gunicorn** web server. 
 
-Here are the instructions to spin up
+Here are the instructions to spin up backend application
 ```python
 # first create a seprate environment with python3
 python3.9 -m venv env
