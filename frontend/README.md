@@ -1,70 +1,12 @@
-# Getting Started with Create React App
+# Frontend Application
+Frontend applicaton consists of two modes: first can be called simulate mode for rendering solution of the problem, while the other mode is to solve this problem through freeplay. To build flexible UI I have used konva.js to programmatically draw Tower of Hanoi UI through canvas tag. As mentioned above tower state data structure is the main backbone of our frontend application. All kind of tower states, logging activities and resolution of tower problems, are dependent upon this data structure. Backend API is responsible for generating solution in tower state data struture. After getting solution, frontend app programmatically generates number of pegs and then uses those pegs to simulate an animated flow which moves all pegs from tower one to tower 3. In simulator mode there are two buttons which can increase or decrease numbers of pegs. After selecting number of pegs, click on solve button which will start simulating new solution again. In freeplay mode, user gets a chance to solve this problem on his own. Peg can be dragged and dropped into various towers and you can always reset the puzzle. It is react applicaiton which heavily relies on hocks, useEffect and functional component. Frontend application can be accessed from this URL https://tower-of-hanoi-ui-7c6aeeb204e8.herokuapp.com/
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Here are the instructions to start the frontend application 
+```python
+  # install node version v16.14.2, I usually use nvm to manage multiple node version on my system.
+  nvm install v16.14.2
+  # next step is to install all the dependent and update enviorment variable with valid backend url
+  npm instll
+  # To frontend application
+  npm run start
+```
