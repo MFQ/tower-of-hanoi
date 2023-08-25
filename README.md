@@ -42,7 +42,17 @@ Here are the instructure to start frontend application
 Backend application is consist of one endpoint who accepts **number_of_pegs** from user generates solution for the problem. Orignal implementation of alogrithm only prints out moves in the form of strings. I have wrote a helper function which generates tower state data structure format. As it is an python Flask based application so for deployment I have used **gunicorn** web server gateway interface HTTP server for deployment on Heroku. 
 here are the instructions to spin up
 ```python
-# first create an indviual with this command               
+# first create an seprate environment with python3
+python3.9 -m venv env
+
+#activate into that environment 
+source env/bin/activate
+
+#install all the dependent modules with pip3
+pip3 install -r requirement.txt
+
+#Now  run gunicorn command to start the server
+gunicorn wsgi:app
 ```
 
 
