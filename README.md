@@ -24,6 +24,12 @@ moves_for_three_pegs = [
 ```
 This data structure is kind of backbone for both frontend and backend applications. As it is an array so its accessibility and maintenance is super simple which in result makes implementation of Tower of Hannoi problem super simple. 
 
+# Tech Stack
+
+- Frontend Application: React.js, konva.js
+- Backend Application: Python 3, Flask, gunicorn
+- Devops: Heroku
+
 # Frontend Application
 Frontend application consists of two modes: first can be called simulate mode for rendering solution of the problem, while the other mode is to solve this problem through freeplay. To build flexible UI I have used konva.js to programmatically draw Tower of Hanoi UI through canvas tag. As mentioned above tower state data structure is the main backbone of our frontend application. All kind of tower states, logging activities and resolution of tower problems, are dependent upon this data structure. Backend API is responsible for generating solution in tower state data struture. After getting solution, frontend app programmatically generates number of pegs and then uses those pegs to simulate an animated flow which moves all pegs from tower one to tower 3. In simulator mode there are two buttons which can increase or decrease numbers of pegs. After selecting number of pegs, click on solve button which will start simulating new solution again. In freeplay mode, user gets a chance to solve this problem on his own. Peg can be dragged and dropped into various towers and you can always reset the puzzle. It is react applicaiton which heavily relies on hocks, useEffect and functional component. Frontend application can be accessed from this URL https://tower-of-hanoi-ui-7c6aeeb204e8.herokuapp.com/
 
