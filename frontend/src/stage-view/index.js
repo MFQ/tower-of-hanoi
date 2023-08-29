@@ -29,7 +29,6 @@ const StageView = ({
     }
   }, [towerThreeState])
 
-
   useEffect(() => {
     if(restart) {      
       setTowerOneState([...generate_pegs(numberOFPegs)]);
@@ -38,6 +37,30 @@ const StageView = ({
       setRestart(false)
     }    
   }, [restart])
+
+  useEffect( () => {
+    if(playing) {
+      generate_steps(numberOFPegs)
+      .then(res => {        
+        if(res.data) {
+          const {steps} = res.data
+          steps.forEach((step, i) => {
+            setTimeout(() => {
+              const [t1, t2, t3] = step;
+              setTowerOneState(t1);
+              setTowerTwoState(t2);
+              setTowerThreeState(t3);
+              logStep(step)
+              if(i === steps.length - 1) {
+                setPlaying(false)
+              }
+            }, i * 2000);  // one sec interval
+            
+          });
+        }
+      })
+    }
+  }, [playing])
 
   const updateState = (tower, peg) => {
     if(TowerOne === tower)
@@ -119,33 +142,6 @@ const StageView = ({
       }
     }
   }
-
-  useEffect( () => {
-
-    if(playing) {
-      generate_steps(numberOFPegs)
-      .then(res => {        
-        if(res.data) {
-          const {steps} = res.data
-          steps.forEach((step, i) => {
-            setTimeout(() => {
-              const [t1, t2, t3] = step;
-              setTowerOneState(t1);
-              setTowerTwoState(t2);
-              setTowerThreeState(t3);
-              logStep(step)
-              if(i === steps.length - 1) {
-                setPlaying(false)
-              }
-            }, i * 2000);  // one sec interval
-            
-          });
-        }
-      })
-    }
-  }, [playing])
-  
-
   return (
     <Stage width={MaxWidth + 50} height={MaxHeight}>
       <TowerState input={towerOneState} isDragable={isDragable} onDragMove={onDragMove} onDragEnd={onDragEnd} towrNumber={TowerOne} />

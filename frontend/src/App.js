@@ -61,7 +61,7 @@ const App = () => {
         />
       }
       {
-        complete && <p className='complete'> Completed!!! </p>
+        complete && <p className='complete'> Completed!! </p>
       }
       <ActivityLog renderSteps={renderSteps}/>
     </>
