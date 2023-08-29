@@ -144,10 +144,10 @@ const StageView = ({
   }
   return (
     <Stage width={MaxWidth + 50} height={MaxHeight}>
+      <Towers />
       <TowerState input={towerOneState} isDragable={isDragable} onDragMove={onDragMove} onDragEnd={onDragEnd} towrNumber={TowerOne} />
       <TowerState input={towerTwoState} isDragable={isDragable} onDragMove={onDragMove} onDragEnd={onDragEnd} towrNumber={TowerTwo} />
       <TowerState input={towerThreeState} isDragable={isDragable} onDragMove={onDragMove} onDragEnd={onDragEnd} towrNumber={TowerThree} />
-      <Towers />
     </Stage>
   )
 }
